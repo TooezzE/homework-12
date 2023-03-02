@@ -12,12 +12,12 @@ public class Main {
         downloadVersion(operationSystem, deviceYear);
         System.out.println("Задача 3. Введите расстояние от офиса до адреса доставки: ");
         int clientDistance = console.nextInt();
-        calculatingDeliveryTime(clientDistance);
+        System.out.print("Доставка займет " + calculatingDeliveryTime(clientDistance) + " дней");
 
     }
 
     public static void checkingYearForLeap(int year) {
-        if(year % 4 == 0 || year % 100 != 0 || year % 400 == 0){
+        if(year % 4 == 0 && year % 100 != 0 || year % 400 == 0){
             System.out.println(year + " год является високосным");
         } else{
             System.out.println(year + " год не является високосным");
@@ -25,35 +25,27 @@ public class Main {
     }
 
     public static void downloadVersion(int clientOS, int clientDeviceYear){
-        switch (clientOS){
-            case 0:
-                if (clientDeviceYear >= 2015) {
+                if (clientOS == 0 && clientDeviceYear >= 2015) {
                     System.out.println("Установите версию приложения для IOS по ссылке");
-                } else if (clientDeviceYear < 2015) {
-                    System.out.println("Установите облегченную версию приложения дл IOS по ссылке");
-                }
-                break;
-
-            case 1:
-                if(clientDeviceYear >= 2015) {
+                } else if (clientOS == 0 && clientDeviceYear < 2015) {
+                    System.out.println("Установите облегченную версию приложения для IOS по ссылке");
+                }else if(clientOS == 1 && clientDeviceYear >= 2015) {
                     System.out.println("Установите версию приложения для Android по ссылке");
-                } else if (clientDeviceYear < 2015) {
+                } else if (clientOS == 1 && clientDeviceYear < 2015) {
                     System.out.println("Установите облегченную версию приложения для Android по ссылке");
                 }
-                break;
         }
-    }
 
     public static int calculatingDeliveryTime(int deliveryDistance) {
         int deliveryTime = 0;
         if(deliveryDistance <= 20){
-            System.out.println("Потребуется дней: " + (deliveryTime + 1));
+            deliveryTime = deliveryTime + 1;
         } else if (deliveryDistance > 20 && deliveryDistance <= 60) {
-            System.out.println("Потребуется дней: " + (deliveryTime + 2));
+            deliveryTime = deliveryTime + 2;
         } else if (deliveryDistance > 60 && deliveryDistance <= 100) {
-            System.out.println("Потребуется дней: " + (deliveryTime + 3));
+            deliveryTime = deliveryTime + 3;
         } else if(deliveryDistance > 100){
-            System.out.println("Доставки нет");
+            deliveryTime = 0;
         }
         return deliveryTime;
     }
